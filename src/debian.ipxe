@@ -3,6 +3,8 @@
 # Debian Operating System
 # http://www.debian.org
 
+set debian_non_free_mirror rjoc-deb-non-free.s3-ap-southeast-2.amazonaws.com
+
 goto ${menu}
 
 :debian
@@ -75,8 +77,10 @@ goto deb_boot
 :deb_boot
 imgfree
 echo Boot parameters: ${install_params} -- quiet ${params}
-kernel http://${debian_mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} ${console} -- quiet ${params} initrd=initrd.gz
-initrd http://${debian_mirror}/${dir}/initrd.gz
+# kernel http://${debian_non_free_mirror}/${dir}/linux ${install_params} ${netcfg} ${mirrorcfg} ${console} -- quiet ${params} initrd=initrd.gz
+# initrd http://${debian_non_free_mirror}/${dir}/initrd.gz
+kernel http://${debian_non_free_mirror}/linux ${install_params} ${netcfg} ${mirrorcfg} ${console} -- quiet ${params} initrd=initrd.gz
+initrd http://${debian_non_free_mirror}/initrd.gz
 echo
 echo MD5sums:
 md5sum linux initrd.gz
